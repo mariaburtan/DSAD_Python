@@ -13,8 +13,8 @@ def plot_varianta(alpha:np.ndarray,std=True,P=00):
     ax.set_ylabel("Varianta", fontdict={'fontsize': 12, 'color': 'b'})
 
 
-    n=len(alpha)
-    x = np.arange(1, n + 1)
+    m=len(alpha)
+    x = np.arange(1, m + 1)
     ax.plot(x,alpha)
     ax.set_xticks(x)
     ax.scatter(x,alpha,color='r',alpha=0.5)
@@ -22,7 +22,7 @@ def plot_varianta(alpha:np.ndarray,std=True,P=00):
 #Criteriul acoperirii simple
 
     procent=np.cumsum(alpha*100/sum(alpha))
-    k1=np.where(procent>P)[0]
+    k1=np.where(procent>P)[0][0]+1
 
 #trasare linie orizontale
     ax.axhline(alpha[k1-1],color='g',label='Varianta acoperita > ' +str(P))
@@ -32,7 +32,7 @@ def plot_varianta(alpha:np.ndarray,std=True,P=00):
         k2=np.where(alpha>1)[0][-1]+1
         ax.axhline(1,color='c',label='Kaiser')
     else:
-        k2=True
+        k2=None
 
 
     ax.legend()

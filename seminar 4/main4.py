@@ -3,9 +3,10 @@ import sys
 import numpy as np
 import  pandas as pd
 
+from grafice import *
+
 np.set_printoptions(suppress=True,precision=3,threshold=sys.maxsize)
 
-from grafice import *
 from functii4 import *
 
 df=pd.read_csv("data_in/ConsumAlimentar/ConsumAlimentar.csv",index_col=0)

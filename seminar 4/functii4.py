@@ -7,7 +7,7 @@ def nan_replace_df(df:pd.DataFrame):
     for col in df.columns:
         if df[col].isna().any(): #intoarce obiect serie df[col] fiecare coloana este vazuta ca o serie isna e o metoda serie care intoarce o alta serie true/false in fct de ce gaseste in serie. any este metoda din serie acre intoarce true daca exista cel putin o valoare
             if is_numeric_dtype(df[col]):
-                df.fillna({col:df[col].mean()},inplace=True)
+                df.fillna({col:df[col].mean()}, inplace=True)
             else:
                 df.fillna({col: df[col].mode()[0]}, inplace=True)
 
@@ -19,7 +19,7 @@ def acp(x:np.ndarray,std=True,nlib=0):
 #determinare tabel centrat
 
 #daca avem standardizare
-    if std==True:
+    if std:
         x_=x_/np.std(x_,axis=0) #fiecare coloana se imparte la standardizarea sa
 
     r_v = (1/(n-nlib)) * x_.T @ x_
