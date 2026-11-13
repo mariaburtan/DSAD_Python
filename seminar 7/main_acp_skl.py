@@ -20,6 +20,8 @@ variabile_observate = list(df.columns.values)[2:-1]
 #print(variabile_observate)
 
 x = df[variabile_observate].values #datele normale
+n,m =x.shape
+
 
 #           STANDARDIZARE
 standardizare=True
@@ -29,10 +31,22 @@ if standardizare:
 else:
     x_=x
 
-
 #       MODEL ACP       PCA - principal component analysis
 model_acp=PCA()
 
 model_acp.fit(x_) #calculeaza parametrii modelului
-alpha=model_acp.explained_variance_
+alpha=model_acp.explained_variance_*(n-1)/n
 print(alpha)
+
+a=model_acp.components_
+#r=a*np.sqrt(alpha)
+c=model_acp.transform(x_) #   CALCULAM SCORURILE / COMPONENTELE
+
+
+r=np.corrcoef(x_,c,rowvar=False)[:m,m:]
+
+df_r=tabelare_salvare_matrice(r,variabile_observate,["C"+str(i+1) for i in range(1,m+1)],"Variabile","R-skl.csv")
+
+#idem main.py
+
+
